@@ -1,0 +1,97 @@
+name: Personal Hub V9 - manual Android build
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'debug = temporary testing; release = stable custom signing secrets required'
+        required: true
+        default: debug
+        type: choice
+        options:
+          - debug
+          - release
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install offline test prerequisites
+        run: python -m pip install -r bridge/requirements-security.txt
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+      - uses: android-actions/setup-android@v4
+      - name: Android SDK prerequisites
+        run: sdkmanager --install 'platforms;android-36' 'build-tools;35.0.0'
+      - name: Static source and asset checks
+        run: |
+          python3 tools/sync_android_assets.py --check
+          python3 tools/android_preflight_15.py
+          python3 tools/android_preflight_16.py
+          python3 tools/android_preflight_17.py
+          python3 tools/android_source_compile_gate.py
+      - name: Portable regression suite
+        run: python3 tests/run_all.py
+      - name: Prepare stable release signing (only for requested release)
+        if: ${{ inputs.mode == 'release' }}
+        working-directory: android
+        env:
+          PH_KEYSTORE_B64: ${{ secrets.PH_KEYSTORE_B64 }}
+          PH_STORE_PASSWORD: ${{ secrets.PH_STORE_PASSWORD }}
+          PH_KEY_ALIAS: ${{ secrets.PH_KEY_ALIAS }}
+          PH_KEY_PASSWORD: ${{ secrets.PH_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          : "${PH_KEYSTORE_B64:?Missing PH_KEYSTORE_B64 GitHub Actions secret}"
+          : "${PH_STORE_PASSWORD:?Missing PH_STORE_PASSWORD GitHub Actions secret}"
+          : "${PH_KEY_ALIAS:?Missing PH_KEY_ALIAS GitHub Actions secret}"
+          : "${PH_KEY_PASSWORD:?Missing PH_KEY_PASSWORD GitHub Actions secret}"
+          printf %s "$PH_KEYSTORE_B64" | base64 -d > personal-release.keystore
+          chmod 600 personal-release.keystore
+      - name: Build debug preview APK
+        if: ${{ inputs.mode == 'debug' }}
+        working-directory: android
+        run: gradle --no-daemon :app:assembleDebug
+      - name: Build signed release preview APK
+        if: ${{ inputs.mode == 'release' }}
+        working-directory: android
+        env:
+          PH_KEYSTORE_PATH: ${{ github.workspace }}/android/personal-release.keystore
+          PH_STORE_PASSWORD: ${{ secrets.PH_STORE_PASSWORD }}
+          PH_KEY_ALIAS: ${{ secrets.PH_KEY_ALIAS }}
+          PH_KEY_PASSWORD: ${{ secrets.PH_KEY_PASSWORD }}
+        run: gradle --no-daemon :app:assembleRelease
+      - name: Verify APK package and signing using Android SDK tools
+        working-directory: android
+        run: |
+          set -euo pipefail
+          TYPE='${{ inputs.mode }}'
+          APK="app/build/outputs/apk/$TYPE/app-$TYPE.apk"
+          test -s "$APK"
+          python3 ../tools/verify_android_apk.py "$APK" --web ../web \
+            --build-tools "$ANDROID_HOME/build-tools/35.0.0" \
+            --sha-output "app-$TYPE.apk.sha256"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: personalhub-v9-${{ inputs.mode }}-preview-1_8
+          path: |
+            android/app/build/outputs/apk/${{ inputs.mode }}/*.apk
+            android/app-${{ inputs.mode }}.apk.sha256
+          if-no-files-found: error
+          retention-days: 7
