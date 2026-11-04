@@ -1,0 +1,13 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#060a1c"><title>Personal Hub // 设备与屏幕</title><link rel="stylesheet" href="./safety/safety.css"></head><body>
+<div class="panel"><header><div><small>PERSONAL HUB / V9 DEVICE / 1.5</small><h1>手机设备与屏幕</h1><p>横屏沉浸体验 · 显示模式 · 能耗控制</p></div><a class="button" href="./index.html">返回中枢</a></header>
+<div id="message" class="message" role="status">正在检查运行环境…</div>
+<section><h2>01 / Android 原生设置</h2><p>以下设置只对内置 Android APK 生效，网页/PWA 不会修改手机系统配置。</p>
+<label><input type="checkbox" id="immersive"> 沉浸式全屏（隐藏系统状态栏/导航栏；可从边缘滑动临时呼出）</label>
+<label><input type="checkbox" id="awake"> 应用显示时保持屏幕常亮（默认关闭）</label>
+<p class="hint">长期常亮可能造成 OLED 屏幕烧屏、发热和耗电。即使开启常亮，系统仍可能因温度、电量或其他策略关闭应用；默认不建议 24 小时亮屏。</p>
+<button id="save" class="primary" type="button">保存手机显示设置</button></section>
+<section><h2>02 / 横向手势翻页</h2><label><input type="checkbox" id="swipe"> 在主控界面横屏时左右滑动切换模块</label>
+<p class="hint">仅在主控内容区生效，避开文字编辑、按钮、对话框和纵向滚动。关闭此选项可降低误触。</p></section>
+<section><h2>03 / 安全提醒</h2><p>备份请在「数据保护中心」导出到 Android 系统文件选择器；收到写入成功提示后，还要在文件管理器核对。APK 卸载、清除数据、改包名或改签名均有丢失原数据库的风险。</p><a class="button" href="./safety/safety.html">数据保护中心</a></section>
+<footer>Android 私有设置和网页手势偏好仅保存在本设备，不需要云账号。</footer></div>
+<script src="./native-file.js"></script><script src="./device.js"></script></body></html>

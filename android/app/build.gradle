@@ -1,0 +1,43 @@
+plugins { id 'com.android.application' }
+
+// Optional stable signing via environment variables. Never put the keystore in Git.
+def releaseKeyFile = System.getenv('PH_KEYSTORE_PATH')
+def releaseKeyPass = System.getenv('PH_KEY_PASSWORD')
+def releaseStorePass = System.getenv('PH_STORE_PASSWORD')
+def releaseAlias = System.getenv('PH_KEY_ALIAS')
+def haveReleaseKeys = releaseKeyFile && releaseKeyPass && releaseStorePass && releaseAlias
+
+android {
+    namespace 'dev.personalhub.v9preview'
+    compileSdk 36
+    defaultConfig {
+        // Deliberately ISOLATED from the user's already-installed Personal Hub.
+        // Never switch package name and assume its old IndexedDB transfers.
+        applicationId 'dev.personalhub.v9preview'
+        minSdk 26
+        targetSdk 35
+        versionCode 5
+        versionName '1.8.0-preview'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    signingConfigs {
+        if (haveReleaseKeys) {
+            personalRelease {
+                storeFile file(releaseKeyFile)
+                storePassword releaseStorePass
+                keyAlias releaseAlias
+                keyPassword releaseKeyPass
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (haveReleaseKeys) signingConfig signingConfigs.personalRelease
+        }
+    }
+}
+dependencies { implementation 'androidx.webkit:webkit:1.18.0' }

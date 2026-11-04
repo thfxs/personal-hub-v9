@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070e25"><title>Personal Hub // 数据保护</title>
+<link rel="stylesheet" href="./safety.css"></head><body>
+<div class="panel">
+ <header><div><small>PERSONAL HUB / SAFE MODE / 0.9</small><h1>数据保护中心</h1><p>本机离线快照 · 校验备份 · 升级前检查</p></div><a class="button" href="../index.html">返回中枢</a></header>
+ <div id="message" role="status" aria-live="polite" class="message">正在核对本地数据…</div>
+ <div class="stats" id="stats"><div>本地快照<strong>—</strong></div><div>外部备份<strong>—</strong></div><div>加密能力<strong>—</strong></div></div>
+ <section><h2>01 / 安全快照</h2><p>将应用数据复制到独立的本地数据库，自动保留最近 12 份。不清空原始数据，不修改应用数据库结构。</p><div class="actions"><button id="snapshot" class="primary">立即创建本地快照</button><button id="refresh">刷新列表</button></div><div id="snapshots" class="snapshot-list"></div></section>
+ <section><h2>02 / 导出外部备份</h2><p>本机快照仍会随“清除应用数据/浏览器网站数据”一起消失。升级前请导出文件到电脑或其他可靠位置，推荐加密。</p>
+  <label for="password">备份加密密码（至少 12 位；留空可选择明文导出）</label><input id="password" type="password" minlength="12" autocomplete="new-password" placeholder="自行设置；不要忘记密码">
+  <div class="actions"><button class="primary" id="export">导出最新快照</button><button id="confirm-saved">我已在其他位置确认保存备份</button></div>
+  <p class="hint">密码仅在本页内存中用于加密，不保存到应用。明文 JSON 可能包含私密信息或配置密钥。下载是否正常取决于 Android WebView 的系统文件保存能力。</p>
+ </section>
+ <section><h2>03 / 预览与恢复</h2><p>先读取并检查备份内容及 CRC 校验；恢复前自动保存当前状态，且需要第二次确认。跨版本数据表结构不一致时拒绝覆盖。</p>
+  <input id="file" type="file" accept=".json,application/json"><div class="actions"><button id="preview">校验并预览文件</button><button id="restore" class="danger" disabled>确认恢复已校验备份</button></div>
+  <div id="preview-detail" class="preview"></div>
+ </section>
+ <section><h2>升级必须遵守</h2><p>Android <code>applicationId</code>、签名证书必须与已安装版本保持一致，<code>versionCode</code> 必须递增；只覆盖安装，禁止卸载后再装、清除数据或更换签名密钥。实际安装前先导出到电脑。</p><p class="hint">如果恢复页面显示“未检测到数据”，请检查是否通过与主程序完全相同的网址、作用域和 WebView 数据目录打开；此时不要初始化或覆盖数据。</p></section>
+ <footer>LOCAL FIRST · NO CLOUD UPLOAD · 不保证锁屏后台运行或系统级自动备份</footer>
+</div>
+<script src="../native-file.js"></script><script src="./guard-core.js"></script><script src="./safety-ui.js"></script></body></html>

@@ -1,0 +1,13 @@
+{
+  "repos": [
+    "YOUR_ACCOUNT/YOUR_PUBLIC_OR_PRIVATE_REPO"
+  ],
+  "projects": [
+    {
+      "name": "材料管家",
+      "path": "~/Projects/material-manager"
+    }
+  ],
+  "codex": true,
+  "deepseek": false
+}
