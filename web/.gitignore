@@ -1,0 +1,8 @@
+
+# Personal records never belong in source control
+personal-hub-backup*.json
+personal-data*.json
+*.personal.json
+*.local.json
+__pycache__/
+.DS_Store
