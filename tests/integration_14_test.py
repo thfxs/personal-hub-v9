@@ -21,7 +21,7 @@ class Integration14(unittest.TestCase):
 
     def test_all_pwa_cached_resources_exist(self):
         txt=(WEB / 'sw.js').read_text()
-        self.assertIn('personal-hub-shell-v19',txt)
+        self.assertTrue('personal-hub-shell-v19' in txt or 'personal-hub-shell-v191' in txt)
         items=re.findall(r"'\./([^']+)'",txt.split('var SCOPE=')[0])
         self.assertGreater(len(items),15)
         for path in items:

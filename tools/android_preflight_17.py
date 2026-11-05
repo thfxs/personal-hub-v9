@@ -16,7 +16,7 @@ manifest=(R/'android/app/src/main/AndroidManifest.xml').read_text()
 gradle=(R/'android/app/build.gradle').read_text()
 checks={
  'isolated APK package retained':"applicationId 'dev.personalhub.v9preview'" in gradle,
- '1.7+ APK version bump': any(x in gradle for x in ("versionCode 4", "versionCode 5", "versionCode 6")) and any(x in gradle for x in ("versionName '1.7.0-preview'", "versionName '1.8.0-preview'", "versionName '1.9.0-preview'")),
+ '1.7+ APK version bump': any(x in gradle for x in ("versionCode 4", "versionCode 5", "versionCode 6", "versionCode 7")) and any(x in gradle for x in ("versionName '1.7.0-preview'", "versionName '1.8.0-preview'", "versionName '1.9.0-preview'", "versionName '1.9.1-preview'")),
  'cleartext disabled': 'usesCleartextTraffic="false"' in manifest,
  'native network worker not UI': 'Executors.newSingleThreadExecutor()' in j and 'networkExecutor.execute' in j,
  'origin and main frame restricted': 'mainFrame' in j and 'ORIGIN.equals(origin.toString())' in j,
@@ -32,7 +32,7 @@ checks={
  'fingerprint isolation in base key': "'_native_'" in sync and 'nativeConfig.fingerprint' in sync,
  'fingerprint confirmation visible': 'id="nativeVerified"' in html,
  'native remote commands page': (R/'web/remote.html').is_file() and (R/'web/remote.js').is_file() and './remote.html' in main,
- 'offline new assets': 'personal-hub-shell-v19' in (R/'web/sw.js').read_text(),
+ 'offline new assets': ('personal-hub-shell-v19' in (R/'web/sw.js').read_text() or 'personal-hub-shell-v191' in (R/'web/sw.js').read_text()),
  'CI native gate': 'android_preflight_17.py' in ci,
 }
 for k,v in checks.items():print(('[PASS]' if v else '[FAIL]'),k)

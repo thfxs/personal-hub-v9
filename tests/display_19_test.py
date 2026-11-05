@@ -50,8 +50,8 @@ class Display19(unittest.TestCase):
   self.assertEqual(result.returncode,0,result.stdout+result.stderr)
  def test_version_upgrade_is_explicit(self):
   g=(ROOT/'android/app/build.gradle').read_text()
-  self.assertIn('versionCode 6',g)
-  self.assertIn("versionName '1.9.0-preview'",g)
-  self.assertIn('EXPECTED_VERSION_CODE=6',(ROOT/'tools/verify_android_apk.py').read_text())
+  self.assertIn('versionCode 7',g)
+  self.assertIn("versionName '1.9.1-preview'",g)
+  self.assertIn('EXPECTED_VERSION_CODE=7',(ROOT/'tools/verify_android_apk.py').read_text())
 
 if __name__=='__main__': unittest.main(verbosity=2)

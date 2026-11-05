@@ -55,20 +55,20 @@ class GateTests(unittest.TestCase):
             gate.inspect_zip(self.apk,self.web)
 
     def test_signature_and_package_checked_by_sdk_tools(self):
-        self.tool('aapt',"package: name='dev.personalhub.v9preview' versionCode='6' versionName='1.9.0-preview'\\nsdkVersion:'26'\\ntargetSdkVersion:'35'")
+        self.tool('aapt',"package: name='dev.personalhub.v9preview' versionCode='7' versionName='1.9.1-preview'\\nsdkVersion:'26'\\ntargetSdkVersion:'35'")
         self.tool('apksigner',"Verified using v2 scheme (APK Signature Scheme v2): true\\nSigner #1 certificate SHA-256 digest: " + 'ab'*32)
         result=gate.verify(self.apk,self.web,self.path,expected_cert='ab:'*31+'ab')
         self.assertEqual(result['package'],gate.PKG)
-        self.assertEqual(result['version_code'],6)
+        self.assertEqual(result['version_code'],7)
         with self.assertRaisesRegex(ValueError,'证书不匹配'):
             gate.verify(self.apk,self.web,self.path,expected_cert='cd'*32)
 
     def test_wrong_package_or_missing_v2_rejected(self):
-        self.tool('aapt',"package: name='com.wrong.app' versionCode='6' versionName='1.9.0-preview'\\nsdkVersion:'26'\\ntargetSdkVersion:'35'")
+        self.tool('aapt',"package: name='com.wrong.app' versionCode='7' versionName='1.9.1-preview'\\nsdkVersion:'26'\\ntargetSdkVersion:'35'")
         self.tool('apksigner',"Verified using v2 scheme (APK Signature Scheme v2): false\\nSigner #1 certificate SHA-256 digest: " + 'ab'*32)
         with self.assertRaisesRegex(ValueError,'包名'):
             gate.verify(self.apk,self.web,self.path)
-        self.tool('aapt',"package: name='dev.personalhub.v9preview' versionCode='6' versionName='1.9.0-preview'\\nsdkVersion:'26'\\ntargetSdkVersion:'35'")
+        self.tool('aapt',"package: name='dev.personalhub.v9preview' versionCode='7' versionName='1.9.1-preview'\\nsdkVersion:'26'\\ntargetSdkVersion:'35'")
         with self.assertRaisesRegex(ValueError,'V2'):
             gate.verify(self.apk,self.web,self.path)
 

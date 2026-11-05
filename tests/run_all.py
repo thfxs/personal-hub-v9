@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TESTS = ('bridge_test.py', 'reliability_11_test.py', 'ui11_static_test.py',
          'integrate10_test.py', 'integration_test.py', 'android_upgrade_test.py',
-         'integration_12_test.py', 'monitor_13_test.py', 'integration_13_test.py', 'sync_14_test.py', 'integration_14_test.py', 'native_15_test.py', 'security_16_test.py', 'android_release_16_test.py', 'native_secure_17_test.py', 'android_compile_18_test.py', 'display_19_test.py')
+         'integration_12_test.py', 'monitor_13_test.py', 'integration_13_test.py', 'sync_14_test.py', 'integration_14_test.py', 'native_15_test.py', 'security_16_test.py', 'android_release_16_test.py', 'native_secure_17_test.py', 'android_compile_18_test.py', 'display_19_test.py', 'display_191_test.py')
 
 
 def main():
