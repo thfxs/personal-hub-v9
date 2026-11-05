@@ -39,6 +39,11 @@ jobs:
       - uses: android-actions/setup-android@v4
       - name: Android SDK prerequisites
         run: sdkmanager --install 'platforms;android-36' 'build-tools;35.0.0'
+      # The web/ directory is the canonical editable source. CI refreshes Android
+      # assets before verifying them, so manual GitHub web uploads need not copy
+      # duplicated android/app/src/main/assets/web files on every update.
+      - name: Copy authoritative web assets into Android package
+        run: python3 tools/sync_android_assets.py
       - name: Static source and asset checks
         run: |
           python3 tools/sync_android_assets.py --check
@@ -89,7 +94,7 @@ jobs:
             --sha-output "app-$TYPE.apk.sha256"
       - uses: actions/upload-artifact@v4
         with:
-          name: personalhub-v9-${{ inputs.mode }}-preview-1_8
+          name: personalhub-v9-${{ inputs.mode }}-preview-1_9
           path: |
             android/app/build/outputs/apk/${{ inputs.mode }}/*.apk
             android/app-${{ inputs.mode }}.apk.sha256
