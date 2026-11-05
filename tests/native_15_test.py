@@ -67,7 +67,7 @@ class NativeV15(unittest.TestCase):
 
     def test_sw_offline_precache_excludes_private_data(self):
         sw=(WEB/'sw.js').read_text()
-        self.assertRegex(sw,r'personal-hub-shell-v1[67]')
+        self.assertRegex(sw,r'personal-hub-shell-v1[679]')
         for filename in ('./native-file.js','./device.html','./device.js','./swipe-nav.js'):
             self.assertIn(filename,sw)
         self.assertNotIn('personal-hub-backup',sw)

@@ -20,7 +20,7 @@ class Integration13Tests(unittest.TestCase):
 
     def test_offline_cache_13_contains_monitors(self):
         text=(WEB/'sw.js').read_text()
-        self.assertIn('personal-hub-shell-v17',text) # 1.5 bumps cache key, retaining previous resources
+        self.assertIn('personal-hub-shell-v19',text) # 1.5 bumps cache key, retaining previous resources
         for item in ('./ops/index.html','./ops/ops.css','./ops/logic.js','./ops/ops.js'):
             self.assertIn(item,text)
 
