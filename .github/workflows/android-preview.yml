@@ -94,7 +94,7 @@ jobs:
             --sha-output "app-$TYPE.apk.sha256"
       - uses: actions/upload-artifact@v4
         with:
-          name: personalhub-v9-${{ inputs.mode }}-preview-1_9
+          name: personalhub-v9-${{ inputs.mode }}-preview-1_9_1
           path: |
             android/app/build/outputs/apk/${{ inputs.mode }}/*.apk
             android/app-${{ inputs.mode }}.apk.sha256
