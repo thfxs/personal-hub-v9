@@ -1,5 +1,5 @@
 /* Personal Hub V9 landscape page fitting, 1.9.1.
- * Landscape: one viewport per subpage; data stays in the original JS store.
+ * Landscape: edge-to-edge swipe-only subpages; data stays in the original JS store.
  * Portrait: original vertical scrolling. Modals keep their own scroll.
  * No timer/polling loop and no interception of vertical gestures.
  */
@@ -29,17 +29,16 @@
    pages[i].hidden=!active;
    pages[i].setAttribute('aria-hidden',active?'false':'true');
   }
-  var count=main.querySelector('.ph20-count'),prev=main.querySelector('.ph20-prev'),next=main.querySelector('.ph20-next');
+  var count=main.querySelector('.ph20-count'),dots=main.querySelector('.ph20-dots');
   if(count)count.textContent=(currentIndex+1)+' / '+pages.length;
-  if(prev)prev.disabled=currentIndex===0;
-  if(next)next.disabled=currentIndex>=pages.length-1;
+  if(dots){dots.innerHTML='';for(var j=0;j<pages.length;j++){var dot=element('span',j===currentIndex?'ph20-dot is-active':'ph20-dot');dots.appendChild(dot);}}
  }
  function makeControls(){
-  var bar=element('div','ph20-controls');bar.setAttribute('aria-label','横屏内容翻页');
-  var left=element('button','ph20-prev');left.type='button';left.textContent='← 上一页';left.setAttribute('aria-label','上一页');
+  // Deliberately non-interactive. Every subpage is reached by horizontal swipe.
+  var bar=element('div','ph20-controls');bar.setAttribute('aria-label','当前横屏分页位置');
+  var dots=element('div','ph20-dots');dots.setAttribute('aria-hidden','true');
   var label=element('span','ph20-count');label.setAttribute('aria-live','polite');
-  var right=element('button','ph20-next');right.type='button';right.textContent='下一页 →';right.setAttribute('aria-label','下一页');
-  bar.appendChild(left);bar.appendChild(label);bar.appendChild(right);return bar;
+  bar.appendChild(dots);bar.appendChild(label);return bar;
  }
  function overflowNote(text){var note=element('p','ph20-slide-tip');note.textContent=text;return note;}
  function makeGridSlides(source,available){
@@ -154,11 +153,6 @@
    if(!main.querySelector(':scope > .ph20-stage'))schedule();
   });
   observer.observe(main,{childList:true});
-  main.addEventListener('click',function(ev){
-   if(!live)return;
-   if(ev.target.closest('.ph20-prev')){ev.stopPropagation();setPage(currentIndex-1);}
-   if(ev.target.closest('.ph20-next')){ev.stopPropagation();setPage(currentIndex+1);}
-  });
   main.addEventListener('touchstart',function(ev){
    gesture=null;
    if(!live||ev.touches.length!==1||focusable(ev.target))return;

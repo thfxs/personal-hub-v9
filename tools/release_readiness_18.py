@@ -46,7 +46,7 @@ def main():
             if opts.build_tools:cmd+=['--build-tools',str(opts.build_tools)]
             apk_detail=invoke(cmd)
             status='APK_ARTIFACT_VERIFIED' if apk_detail['ok'] else 'APK_VERIFICATION_FAILED'
-    report={'version':'1.9.1-preview','source':str(ROOT),'checks':checks,
+    report={'version':'1.9.2-preview','source':str(ROOT),'checks':checks,
             'apk_verification':apk_detail,'status':status,
             'notice':'SOURCE_READY only verifies portable source checks; Android SDK build + APK signature + device verification are separate'}
     if opts.json_output:

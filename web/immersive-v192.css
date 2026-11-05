@@ -1,0 +1,79 @@
+/* Personal Hub 1.9.2 — edge-to-edge landscape, swipe-only pager, verified project progress rings.
+ * Earlier HUD styles and portrait navigation stay untouched. No external resources.
+ */
+.project-entry{align-items:center;position:relative;gap:12px;}
+.project-entry .entry-main{min-width:0;flex:1;}
+.project-entry .entry-title{letter-spacing:.2px;}
+.project-entry .entry-side{align-self:center;}
+.ph-progress-ring{--ring-size:68px;position:relative;display:flex;align-items:center;justify-content:center;
+ flex:0 0 var(--ring-size);width:var(--ring-size);height:var(--ring-size);filter:drop-shadow(0 0 6px rgba(55,230,255,.16));}
+.ph-progress-ring svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.ph-ring-track,.ph-ring-arc{fill:none;stroke-width:5;}
+.ph-ring-track{stroke:rgba(91,166,214,.18);}
+.ph-ring-arc{stroke:#37e6ff;stroke-linecap:round;}
+.ph-progress-ring.unverified .ph-ring-track{stroke:rgba(112,157,201,.31);stroke-dasharray:3 7;}
+.ph-progress-ring.unverified .ph-ring-arc{stroke:transparent;}
+.ph-ring-value{position:relative;display:block;z-index:1;font-size:16px;font-weight:800;line-height:1;color:#c6f7ff;
+ letter-spacing:-.35px;font-variant-numeric:tabular-nums;text-shadow:0 0 10px rgba(46,201,255,.38);}
+.ph-progress-ring.unverified .ph-ring-value{color:#b0bad0;font-size:20px;transform:translateY(-4px);}
+.ph-ring-unknown{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);color:#95abc6;
+ font-size:8px;line-height:1;white-space:nowrap;}
+.ph-progress-ring.compact{--ring-size:48px;}
+.ph-progress-ring.compact .ph-ring-value{font-size:12px;}
+.ph-progress-ring.compact.unverified .ph-ring-value{font-size:16px;}
+.ph-progress-ring.compact .ph-ring-unknown{font-size:7px;bottom:10px;}
+@media (max-width:480px) and (orientation:portrait){
+ .project-entry{gap:6px;}
+ .project-entry .ph-progress-ring{--ring-size:52px;}
+ .project-entry .entry-side .button{padding:6px;}
+ .project-entry .ph-ring-value{font-size:12px;}
+ .project-entry .ph-ring-unknown{font-size:7px;bottom:12px;}
+}
+@media (orientation:landscape) and (min-width:540px) and (min-height:290px){
+ /* Only the business surface is shown. Old navigation remains in the DOM for swipe actions. */
+ html,body{width:100%;height:100%;overflow:hidden;}
+ .shell{height:100vh!important;height:100dvh!important;min-height:0!important;width:100%;}
+ .shell>.sidebar,.workspace>.topbar,.workspace>.footer,.workspace>.system-alerts{display:none!important;}
+ .workspace{flex:1 1 100%;width:100%;min-width:0;min-height:0;overflow:hidden;}
+ #main-content{flex:1 1 0%;height:100%;min-height:0;min-width:0;padding:10px 14px!important;
+   overflow:hidden!important;overscroll-behavior:contain;}
+ #main-content.ph20-active{padding:10px 14px!important;}
+ #main-content .ph20-stage{gap:6px;min-height:0;height:100%;}
+ #main-content .ph20-fixed:empty{display:none;}
+ #main-content .ph20-fixed .page-head{margin-bottom:5px;}
+ #main-content .ph20-fixed .page-head h2{font-size:18px;font-weight:780;}
+ #main-content .ph20-fixed .page-head p{font-size:10px;color:#9ab0cc;line-height:1.4;}
+ #main-content .ph20-fixed .toolbar{margin-bottom:3px;}
+ /* Page indicator: passive dots, never a button; minimum screen estate. */
+ #main-content .ph20-controls{flex:0 0 12px;min-height:12px;max-height:12px;padding:0;
+  display:flex;gap:9px;align-items:center;justify-content:center;border:0;background:none;box-shadow:none;}
+ #main-content .ph20-dots{display:flex;justify-content:center;align-items:center;gap:6px;min-height:12px;}
+ #main-content .ph20-dot{width:5px;height:5px;border-radius:4px;background:rgba(107,157,208,.37);transition:background .15s,width .15s;}
+ #main-content .ph20-dot.is-active{width:19px;background:#37e6ff;box-shadow:0 0 7px rgba(55,230,255,.38);}
+ #main-content .ph20-count{min-width:0;font-size:9px;color:#789cbe;letter-spacing:1px;}
+ .ph20-list-page .ph20-grid{gap:10px;}
+ .ph20-grid .project-entry{padding:8px 12px;align-items:center;
+  background:radial-gradient(ellipse at 82% 45%,rgba(42,123,173,.12),transparent 55%),linear-gradient(125deg,rgba(13,33,71,.94),rgba(16,25,57,.9));border:1px solid rgba(70,170,230,.31);
+  box-shadow:inset 0 1px 0 rgba(100,191,251,.08);}
+ .ph20-grid .project-entry .entry-title{font-size:clamp(12px,1.75vw,18px);color:#eff8ff;}
+ .ph20-grid .project-entry .entry-desc{font-size:10px;flex:0 0 auto;line-height:1.5;margin-top:5px;}
+ .ph20-grid .project-entry .ph-progress-ring{--ring-size:82px;}
+ .ph20-grid .project-entry .entry-side{align-self:center;}
+ .ph20-grid .project-entry .entry-main{height:auto;align-self:center;justify-content:center;}
+ .ph20-grid .project-entry .button.tiny{border-color:rgba(71,156,210,.38);}
+ .ph20-slide:not([hidden]){animation:ph192-slide-in 160ms ease-out both;}
+ @keyframes ph192-slide-in{from{opacity:.7;transform:translateX(5px)}to{opacity:1;transform:translateX(0)}}
+ .no-motion .ph20-slide:not([hidden]){animation:none;}
+}
+@media (orientation:landscape) and (min-width:540px) and (min-height:290px) and (max-height:430px){
+ #main-content{padding:6px 10px!important;}
+ #main-content.ph20-active{padding:6px 10px!important;}
+ #main-content .ph20-stage{gap:3px;}
+ .ph20-grid .project-entry .ph-progress-ring{--ring-size:66px;}
+ .ph20-grid .project-entry{padding:5px 8px;gap:6px;}
+ .ph20-grid .project-entry .entry-title{font-size:12px;}
+ .ph20-grid .project-entry .entry-desc{font-size:9px;}
+ #main-content .ph20-fixed .page-head h2{font-size:15px;}
+ #main-content .ph20-fixed .page-head p{font-size:9px;}
+}
+@media (prefers-reduced-motion:reduce){.ph20-slide:not([hidden]){animation:none!important;}.ph20-dot{transition:none!important;}}

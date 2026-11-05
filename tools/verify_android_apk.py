@@ -13,7 +13,7 @@ import zipfile
 from pathlib import Path
 
 PKG='dev.personalhub.v9preview'
-EXPECTED_VERSION_CODE=7
+EXPECTED_VERSION_CODE=8
 EXPECTED_MIN=26
 REQUIRED={'AndroidManifest.xml','resources.arsc','assets/web/index.html','assets/web/app.js',
           'assets/web/styles.css','assets/web/layout-v19.css','assets/web/viewport-v19.js','assets/web/safety/guard-core.js','assets/web/sync/merge.js',

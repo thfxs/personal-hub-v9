@@ -16,7 +16,7 @@ manifest=(R/'android/app/src/main/AndroidManifest.xml').read_text()
 gradle=(R/'android/app/build.gradle').read_text()
 checks={
  'isolated APK package retained':"applicationId 'dev.personalhub.v9preview'" in gradle,
- '1.7+ APK version bump': any(x in gradle for x in ("versionCode 4", "versionCode 5", "versionCode 6", "versionCode 7")) and any(x in gradle for x in ("versionName '1.7.0-preview'", "versionName '1.8.0-preview'", "versionName '1.9.0-preview'", "versionName '1.9.1-preview'")),
+ '1.7+ APK version bump': any(x in gradle for x in ("versionCode 4", "versionCode 5", "versionCode 6", "versionCode 7", "versionCode 8")) and any(x in gradle for x in ("versionName '1.7.0-preview'", "versionName '1.8.0-preview'", "versionName '1.9.0-preview'", "versionName '1.9.1-preview'", "versionName '1.9.2-preview'")),
  'cleartext disabled': 'usesCleartextTraffic="false"' in manifest,
  'native network worker not UI': 'Executors.newSingleThreadExecutor()' in j and 'networkExecutor.execute' in j,
  'origin and main frame restricted': 'mainFrame' in j and 'ORIGIN.equals(origin.toString())' in j,

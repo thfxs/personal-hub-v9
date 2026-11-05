@@ -13,7 +13,7 @@
   main.addEventListener('touchstart',function(event){
    start=null;
    if(!win.matchMedia('(orientation: landscape)').matches||event.touches.length!==1||shouldIgnore(event.target))return;
-   try{if(win.localStorage.getItem('personal_hub_landscape_swipe')==='off')return;}catch(e){}
+   try{if(win.localStorage.getItem('personal_hub_landscape_swipe')==='off' && !main.classList.contains('ph20-active'))return;}catch(e){}
    start={x:event.touches[0].clientX,y:event.touches[0].clientY,time:Date.now(),node:event.target};
   },{passive:true});
   main.addEventListener('touchend',function(event){
