@@ -8,6 +8,7 @@
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./layout-v19.css" />
   <title>PERSONAL HUB // 控制中心</title>
 </head>
 <body>
@@ -20,17 +21,19 @@
     </aside>
     <div class="workspace">
       <header class="topbar">
-        <div class="header-title"><div class="eyebrow">PERSONAL OPERATIONS CENTER <span class="slash">//</span> V9 EDITION</div><h1 id="page-title">主控中心</h1></div>
-        <div class="top-actions"><span class="mode-pill"><span class="led"></span><span id="storage-label">正在检查本地存储</span></span><span class="date-box" id="top-clock"></span><a class="icon-button" href="./device.html" title="手机设备与手势" aria-label="打开手机设备设置" style="text-decoration:none">▣</a><a class="icon-button" href="./sync/index.html" title="多设备数据同步" aria-label="打开数据同步中心" style="text-decoration:none">⇄</a><a class="icon-button" href="./ops/index.html" title="项目监控和事件提醒" aria-label="打开监控与事件中心" style="text-decoration:none">◎</a><a class="icon-button" href="./remote.html" title="APK原生快捷指令" aria-label="打开手机原生快捷指令" style="text-decoration:none">⇥</a><a class="icon-button" href="./bridge-launch.html" title="电脑快捷指令" aria-label="打开电脑快捷指令入口" style="text-decoration:none">⌘</a><a class="icon-button" href="./safety/safety.html" title="数据保护中心" aria-label="打开数据保护中心" style="text-decoration:none">◈</a><button class="icon-button" id="quick-add" type="button" title="快速添加">＋</button></div>
+        <div class="header-title"><div class="eyebrow"><span class="eyebrow-full">PERSONAL OPERATIONS CENTER <span class="slash">//</span> V9 EDITION</span><span class="eyebrow-compact">PERSONAL HUB <span class="slash">//</span> V9 EDITION</span></div><h1 id="page-title">主控中心</h1></div>
+        <span class="date-box" id="top-clock"></span><div class="top-actions"><span class="mode-pill"><span class="led"></span><span id="storage-label">正在检查本地存储</span></span><a class="icon-button" href="./device.html" title="手机设备与手势" aria-label="打开手机设备设置" style="text-decoration:none"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10 17h4"/></svg></a><a class="icon-button" href="./sync/index.html" title="多设备数据同步" aria-label="打开数据同步中心" style="text-decoration:none"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16l-4-4M20 8l-4 4M20 16H4l4-4M4 16l4 4"/></svg></a><a class="icon-button" href="./ops/index.html" title="项目监控和事件提醒" aria-label="打开监控与事件中心" style="text-decoration:none"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 1v2M12 21v2M1 12h2M21 12h2"/></svg></a><a class="icon-button" href="./remote.html" title="APK原生快捷指令" aria-label="打开手机原生快捷指令" style="text-decoration:none"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h15m-6-6 6 6-6 6M21 7v10"/></svg></a><a class="icon-button" href="./bridge-launch.html" title="电脑快捷指令" aria-label="打开电脑快捷指令入口" style="text-decoration:none"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h4m-4 4h3m4-4 3 2-3 2"/></svg></a><a class="icon-button" href="./safety/safety.html" title="数据保护中心" aria-label="打开数据保护中心" style="text-decoration:none"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 8 3v6c0 5-3.5 8.2-8 11-4.5-2.8-8-6-8-11V5l8-3Z"/><path d="m8 12 3 3 5-6"/></svg></a><button class="icon-button" id="quick-add" type="button" title="快速添加" aria-label="快速添加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
       </header>
+      <div class="system-alerts" id="system-alerts" aria-live="polite"></div>
       <main id="main-content" tabindex="-1"></main>
-      <footer class="footer"><span><span class="footer-dot">◆</span> PERSONAL HUB <span class="muted">/</span> 1.7 NATIVE SECURE SYNC</span><span id="save-status">本地数据初始化中</span><span id="footer-time"></span></footer>
+      <footer class="footer"><span><span class="footer-dot">◆</span> PERSONAL HUB <span class="muted">/</span> 1.9 V9 DISPLAY REPAIR</span><span id="save-status">本地数据初始化中</span><span id="footer-time"></span></footer>
     </div>
   </div>
   <div id="modal-root" aria-live="polite"></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <input id="import-input" type="file" accept=".json,application/json" hidden />
   <script src="./native-file.js"></script>
+  <script src="./viewport-v19.js" defer></script>
   <script src="./app.js" defer></script>
   <script src="./swipe-nav.js" defer></script>
   <script src="./safety/guard-core.js"></script>

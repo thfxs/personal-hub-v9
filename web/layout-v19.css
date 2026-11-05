@@ -1,0 +1,82 @@
+/* Personal Hub 1.9 - authorized responsive/interaction corrections.
+ * Keeps styles.css unmodified; no business state or color palette changes.
+ * Explicitly supports old Huawei/HarmonyOS WebView viewport and nested touch scrolling.
+ */
+html,body{height:100%;max-width:100%;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.shell{height:100vh;height:var(--ph-window-height,100vh);min-height:0;max-height:none;overflow:hidden}
+.workspace{min-height:0;min-width:0;overflow:hidden}
+.sidebar,.navigation{min-height:0}
+.navigation{overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+#main-content{flex:1 1 0%;height:0;min-height:0;min-width:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;touch-action:pan-y;position:relative;padding-bottom:max(24px, env(safe-area-inset-bottom))}
+.topbar{min-width:0;overflow:hidden}
+.header-title{flex:0 1 auto;min-width:0}
+.header-title h1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all}
+.eyebrow{overflow:hidden;text-overflow:ellipsis}
+.eyebrow-compact{display:none}
+.date-box{flex:0 0 auto}
+.top-actions{min-width:0;max-width:100%;flex:0 1 auto;gap:7px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x;padding:2px 1px 5px;align-self:center}
+.top-actions::-webkit-scrollbar{display:none}
+.icon-button{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;flex:0 0 38px;width:38px;height:38px;min-width:38px;line-height:1;padding:0;text-align:center;border-radius:10px;text-decoration:none}
+.icon-button svg{display:block;flex:0 0 20px;width:20px;height:20px;margin:0;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.icon-button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.system-alerts:empty{display:none}
+.system-alerts{flex:0 0 auto;min-width:0;display:flex;align-items:center;padding:5px 14px;background:rgba(77,49,19,.24);border-bottom:1px solid rgba(232,172,80,.24)}
+.backup-reminder-banner{display:inline-flex;align-items:center;gap:8px;color:#ffe1ac;font-size:10px;line-height:1.4;padding:2px 6px;text-decoration:none;max-width:100%}
+.backup-reminder-banner:before{content:'◇';color:#ffca6b}
+.hero-main h2{word-break:keep-all;overflow-wrap:break-word}
+.hero-main p{overflow-wrap:anywhere;word-break:normal}
+.page-head,.panel-head,.setting-row{min-width:0}
+.page-head>div:first-child,.panel-head>*:first-child{min-width:0}
+.modal-shade{overflow:auto;-webkit-overflow-scrolling:touch;align-items:safe center}
+.modal{max-height:calc(100vh - 28px);max-height:calc(var(--ph-window-height,100vh) - 28px);-webkit-overflow-scrolling:touch;touch-action:pan-y}
+@media (max-width:980px){
+ .eyebrow-full{display:none}
+ .eyebrow-compact{display:inline}
+ .topbar{gap:8px}
+ .header-title h1{font-size:19px;letter-spacing:1px}
+ .top-actions{gap:6px}
+ .icon-button{flex-basis:37px;width:37px;min-width:37px;height:37px}
+}
+@media (orientation:portrait), (max-width:540px){
+ .topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:'title clock' 'actions actions';height:auto;flex:0 0 auto;min-height:0;align-items:center;column-gap:9px;row-gap:6px;padding:10px 10px 7px}
+ .header-title{grid-area:title;min-width:0}
+ .header-title h1{margin:3px 0 0;font-size:19px;line-height:1.22;white-space:nowrap;letter-spacing:.8px}
+ .eyebrow{white-space:nowrap;font-size:8px;letter-spacing:.8px;line-height:1.25}
+ .date-box{grid-area:clock;font-size:12px;align-self:center;justify-self:end}
+ .top-actions{grid-area:actions;width:100%;justify-self:stretch;max-width:100%;gap:5px;padding:2px 0 3px;scroll-snap-type:x proximity}
+ .icon-button{flex:0 0 38px;width:38px;min-width:38px;height:38px;scroll-snap-align:start}
+ #main-content{padding:12px 12px 26px}
+ .hero-main{padding:15px 14px;min-height:0}
+ .hero-main .hero-index{font-size:9px;letter-spacing:1.5px;line-height:1.4;overflow-wrap:break-word}
+ .hero-main h2{font-size:21px;margin:12px 0 8px;line-height:1.3}
+ .hero-main p{max-width:100%;font-size:11px;line-height:1.6;margin-bottom:13px;letter-spacing:0}
+ .hero-ornament{display:none}
+ .hero-buttons{gap:8px}
+ .hero-buttons .button{font-size:11px;padding:9px 10px}
+ .side-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .metric{min-width:0}
+ .grid-two,.grid-three,.page-grid{grid-template-columns:minmax(0,1fr)}
+ .panel-in{padding:12px}
+ .page-head{align-items:flex-start;flex-wrap:wrap}
+ .page-head h2{line-height:1.35}
+ .setting-row{flex-wrap:wrap;align-items:flex-start}
+ .setting-row .button{max-width:100%}
+ .form-grid{grid-template-columns:1fr}
+ .form-actions{flex-wrap:wrap}
+ .empty{padding:20px 10px}
+ .footer{padding:2px 10px;gap:5px}
+}
+@media (orientation:landscape) and (max-height:520px){
+ .topbar{height:56px;flex:0 0 56px;padding:5px 10px;gap:8px}
+ .header-title h1{font-size:18px;line-height:1.15;margin-top:3px}
+ .eyebrow{font-size:8px;letter-spacing:.9px}
+ .top-actions{gap:5px}
+ .icon-button{flex-basis:35px;min-width:35px;width:35px;height:35px}
+ .footer{height:22px;flex-basis:22px}
+ #main-content{padding:10px 12px 26px}
+ .hero-main{padding:13px 16px;min-height:0}
+ .hero-main h2{font-size:21px;margin:8px 0}
+ .hero-main p{line-height:1.5;margin-bottom:8px}
+ .hero-ornament{transform:scale(.67) rotate(15deg)}
+ .panel-in{padding:11px}
+}

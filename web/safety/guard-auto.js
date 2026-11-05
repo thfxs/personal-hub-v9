@@ -8,8 +8,10 @@
   G.backupStatus().then(function(status){if(!status.reminder)return;
    var link=document.createElement('a');link.href='./safety/safety.html';link.textContent='备份提醒';
    link.setAttribute('aria-label','距离上次确认外部备份已超过7天，打开数据保护中心');
-   link.style.cssText='position:fixed;right:14px;bottom:15px;z-index:9000;display:block;padding:9px 12px;color:#fff2ce;background:#513617;border:1px solid #c09342;border-radius:9px;text-decoration:none;font:13px system-ui;box-shadow:0 0 12px #ffcb6133;';
-   document.body.appendChild(link);
+   link.className='backup-reminder-banner';
+   var slot=document.getElementById('system-alerts');
+   if(slot)slot.appendChild(link);
+   else {link.style.cssText='display:block;padding:8px 12px;color:#fff2ce;background:#513617';document.body.insertBefore(link,document.body.firstChild);}
   }).catch(function(){});
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();

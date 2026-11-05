@@ -1,6 +1,6 @@
 /* Personal Hub 1.4 integration baseline, static shell only. No private-data caching. */
-var CACHE='personal-hub-shell-v17';
-var SHELL=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest',
+var CACHE='personal-hub-shell-v19';
+var SHELL=['./','./index.html','./styles.css','./layout-v19.css','./viewport-v19.js','./app.js','./manifest.webmanifest',
  './assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png',
  './native-file.js','./swipe-nav.js','./remote.html','./remote.js','./device.html','./device.js',
  './bridge-launch.html','./bridge-launch.css','./bridge-launch.js',

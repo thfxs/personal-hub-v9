@@ -1,1 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><defs><linearGradient id="a" x2="1" y2="1"><stop stop-color="#19ebff"/><stop offset=".6" stop-color="#6753ff"/><stop offset="1" stop-color="#ef3eff"/></linearGradient></defs><rect width="192" height="192" rx="42" fill="#071025"/><path d="M20 56V20h36M136 20h36v36M20 136v36h36M136 172h36v-36" fill="none" stroke="url(#a)" stroke-width="8"/><path d="M47 128V64h35c17 0 25 9 25 23s-9 24-25 24H66v17M120 64v64M120 96h29M149 64v64" fill="none" stroke="#d7faff" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0A2C53"/><stop offset=".54" stop-color="#0A1733"/><stop offset="1" stop-color="#070B20"/></linearGradient>
+ <linearGradient id="ring" x1=".15" y1=".15" x2=".9" y2=".95"><stop stop-color="#1EE8F8"/><stop offset=".65" stop-color="#5294FF"/><stop offset="1" stop-color="#EC45CE"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="9" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ </defs>
+ <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+ <rect x="18" y="18" width="476" height="476" rx="105" fill="none" stroke="#3279BA" stroke-width="4" opacity=".5"/>
+ <g fill="none"><path d="M256 80 407 168 407 344 256 432 105 344 105 168Z" stroke="#1585C8" stroke-width="24" opacity=".25" filter="url(#glow)"/>
+ <path d="M256 80 407 168 407 344 256 432 105 344 105 168Z" stroke="url(#ring)" stroke-width="12"/>
+ <path d="M256 98 390 177 M398 214v86 M256 414 122 335 M114 298v-90" stroke="#A95CFF" stroke-width="5" opacity=".8"/>
+ <path d="M170 332 V183 H239 C284 183 300 201 300 235 C300 267 276 283 239 283 H170" stroke="#E7F8FF" stroke-width="30" stroke-linejoin="round" stroke-linecap="round"/>
+ <path d="M317 183 V332 M317 257 H369 M369 183 V332" stroke="#3CE8FF" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M256 56 V76 M256 436 V456 M81 256 H101 M411 256 H431" stroke="#9AA9FF" stroke-width="6" stroke-linecap="round"/>
+ </g>
+</svg>
