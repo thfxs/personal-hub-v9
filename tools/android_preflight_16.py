@@ -14,7 +14,7 @@ checks={
     'isolated appId': "applicationId 'dev.personalhub.v9preview'" in gradle,
     'min SDK for V9': 'minSdk 26' in gradle,
     'target SDK 35': 'targetSdk 35' in gradle,
-    'preview version code incremental': ('versionCode 3' in gradle or 'versionCode 4' in gradle or 'versionCode 5' in gradle),
+    'preview version code incremental': ('versionCode 3' in gradle or 'versionCode 4' in gradle or 'versionCode 5' in gradle or 'versionCode 6' in gradle),
     'android compilation platform 36': 'compileSdk 36' in gradle and "platforms;android-36" in ci,
     'Android SDK tool verification': 'tools/verify_android_apk.py' in ci and '--sha-output' in ci,
     'CI requires build and certificate verification': 'assembleDebug' in ci and 'assembleRelease' in ci and 'apksigner' in (P/'tools/verify_android_apk.py').read_text(),
